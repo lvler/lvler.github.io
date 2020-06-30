@@ -12,7 +12,7 @@
                                 <b>Чек #{{ (check_index + 1) }}:</b>
                             </span>
                         </div>
-                        <input type="text" class="form-control" id="basic-url" :value="check.check_name"
+                        <input type="text" class="form-control" :value="check.check_name"
                                placeholder="Например: ЗА ЕДУ / ЗА ТАКСИ" @keyup="fillCheckName(check_index, $event)">
                     </div>
                 </div>
