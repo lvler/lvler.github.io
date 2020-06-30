@@ -13,7 +13,7 @@ var driver = new Builder()
       .windowSize({width: 1440, height: 900})
   ).build();
 
-driver.get('https://lvlr.ru').then(() => {
+driver.get('https://lvler.github.io').then(() => {
   driver.wait(
     until.elementLocated(By.xpath('//*[@id="pay_table"]/tbody/tr[1]/td[1]/input')), 10000
   ).sendKeys('user1').then(() => {
