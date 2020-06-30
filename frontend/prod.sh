@@ -1,2 +1,2 @@
 #!/bin/bash
-yarn prod && mv dist/* ../
+rm -rf ../app.*.js && yarn prod && mv dist/* ../
