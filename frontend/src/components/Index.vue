@@ -141,6 +141,7 @@
         mounted() {
             this.checkDelFlag();
         },
+
         data: function () {
             return {
                 hint_flag: true,
@@ -181,16 +182,19 @@
                 ],
             }
         },
+        
         methods: {
             encodeResult: function () {
                 return process.env.API_ADDR + '/check/' + btoa(encodeURI(JSON.stringify(this.resData)));
             },
+
             copyCheck: function () {
                 let res = document.getElementById('encode-result');
                 res.select();
                 res.setSelectionRange(0, 99999);
                 document.execCommand("copy");
             },
+
             notifyInfo: function (title, text) {
                 this.$notify({
                     group: 'info',
@@ -198,6 +202,7 @@
                     text: text
                 });
             },
+
             notifyError: function (title, text) {
                 this.$notify({
                     group: 'info',
@@ -206,6 +211,7 @@
                     text: text
                 });
             },
+
             checkDelFlag: function () {
                 if (this.tData.length > 1) {
                     this.del_fl = true;
@@ -213,12 +219,14 @@
                     this.del_fl = false;
                 }
             },
+
             addTAbleRow: function (check_index) {
                 this.tData[check_index]['data'].push({
                     name: '',
                     sum: ''
                 });
             },
+
             payment: function () {
                 this.flag = false;
                 this.tData[0].data.forEach(el => {
@@ -226,27 +234,45 @@
                         el.sum = 0;
                     }
                 });
-                console.log(this.tData);
-                // axios.post(process.env.API_ADDR + '/api/payment', {
-                //     'json_data': this.tData
-                // }).then(
-                //     response => {
-                //         this.tData[0].data.forEach(el => {
-                //             if (el.sum === 0) {
-                //                 el.sum = '';
-                //             }
-                //         });
-                //         if (response.data.type === 'success') {
-                //             this.resData = response.data.data;
-                //             this.flag = true;
-                //             document.getElementById('resultBtn').click();
-                //         } else if (response.data.type === 'error') {
-                //             this.flag = false;
-                //             this.notifyError('Ошибка!', response.data.msg);
-                //         }
-                //     }
-                // );
+
+                this.resData = [];
+                this.tData.forEach(check => {
+                    let allSum = 0;
+                    let mostPaid = {
+                        name: undefined,
+                        sum: 0
+                    };
+
+                    check.data.forEach(el => {
+                        allSum += Number.parseFloat(el.sum);
+                        if (mostPaid.sum < el.sum) {
+                            mostPaid = el;
+                        }
+                    });
+
+                    let debtList = [];
+                    check.data.forEach(el => {
+                        if (el.name !== mostPaid.name && el.sum !== mostPaid.sum) {
+                            debtList.push({
+                                from: el.name,
+                                to: mostPaid,
+                                sum: (allSum / check.data.length - el.sum).toFixed(2)
+                            });
+                        }
+                    });
+
+                    this.resData.push({
+                        check_name: check.check_name,
+                        debt_list: debtList
+                    });
+
+                    this.flag = true;
+                    document.getElementById('resultBtn').click();
+                    // this.flag = false;
+                    // this.notifyError('Ошибка!', response.data.msg);
+                });
             },
+
             fillField: function (check_index, type, i, e) {
                 switch (type) {
                     case 'name':
@@ -261,9 +287,11 @@
                     this.notifyInfo('Подсказка', 'Добавьте в чек только тех участников, между которыми хотите разделить сумму чека');
                 }
             },
+
             remove: function (check_index, index) {
                 this.tData[check_index]['data'].splice(index, 1);
             },
+
             removeCheck: function (check_index) {
                 if (this.tData.length === 1) {
                     this.addCheck();
@@ -271,6 +299,7 @@
                 this.tData.splice(check_index, 1);
                 this.checkDelFlag();
             },
+
             fillCheckName: function (check_index, e) {
                 if (this.hint_flag) {
                     this.hint_flag = false;
@@ -278,6 +307,7 @@
                 }
                 this.tData[check_index]['check_name'] = e.target.value;
             },
+
             addCheck: function () {
                 this.tData.push(
                     {

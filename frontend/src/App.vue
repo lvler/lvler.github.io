@@ -37,7 +37,6 @@
 <script>
     export default {
         mounted() {
-            window.axios = require('axios');
             require('bootstrap');
         }
     }
