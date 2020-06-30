@@ -25,8 +25,8 @@
             <div class="row">
                 <div class="col-md-12 footer_text">
                     <b>Leveler</b> &copy; 2019 | <b>Поддержка:</b>
-                    <a href="https://vk.me/lvlr_ru" class="text-decoration-none" target="_blank">
-                        <i class="fab fa-vk"></i> lvlr_ru
+                    <a href="https://vk.me/open_lvler" class="text-decoration-none" target="_blank">
+                        <i class="fab fa-vk"></i> open_lvler
                     </a>
                 </div>
             </div>

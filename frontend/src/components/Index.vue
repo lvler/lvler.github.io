@@ -149,15 +149,32 @@
                 resData: [],
                 tData: [
                     {
-                        check_name: '',
+                        check_name: 'За бар',
                         data: [
                             {
-                                name: '',
-                                sum: ''
+                                name: 'Роман',
+                                sum: '30'
                             },
                             {
-                                name: '',
-                                sum: ''
+                                name: 'Иван',
+                                sum: '20'
+                            },
+                            {
+                                name: 'Василий',
+                                sum: '50'
+                            }
+                        ]
+                    },
+                    {
+                        check_name: 'За такси',
+                        data: [
+                            {
+                                name: 'Роман',
+                                sum: '70'
+                            },
+                            {
+                                name: 'Иван',
+                                sum: '80'
                             }
                         ]
                     }
@@ -209,25 +226,26 @@
                         el.sum = 0;
                     }
                 });
-                axios.post(process.env.API_ADDR + '/api/payment', {
-                    'json_data': this.tData
-                }).then(
-                    response => {
-                        this.tData[0].data.forEach(el => {
-                            if (el.sum === 0) {
-                                el.sum = '';
-                            }
-                        });
-                        if (response.data.type === 'success') {
-                            this.resData = response.data.data;
-                            this.flag = true;
-                            document.getElementById('resultBtn').click();
-                        } else if (response.data.type === 'error') {
-                            this.flag = false;
-                            this.notifyError('Ошибка!', response.data.msg);
-                        }
-                    }
-                );
+                console.log(this.tData);
+                // axios.post(process.env.API_ADDR + '/api/payment', {
+                //     'json_data': this.tData
+                // }).then(
+                //     response => {
+                //         this.tData[0].data.forEach(el => {
+                //             if (el.sum === 0) {
+                //                 el.sum = '';
+                //             }
+                //         });
+                //         if (response.data.type === 'success') {
+                //             this.resData = response.data.data;
+                //             this.flag = true;
+                //             document.getElementById('resultBtn').click();
+                //         } else if (response.data.type === 'error') {
+                //             this.flag = false;
+                //             this.notifyError('Ошибка!', response.data.msg);
+                //         }
+                //     }
+                // );
             },
             fillField: function (check_index, type, i, e) {
                 switch (type) {
