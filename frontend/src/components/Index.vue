@@ -92,23 +92,27 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover table-bordered thead-light">
-                                <thead>
-                                <tr>
-                                    <th>Кто отдает</th>
-                                    <th>Кому отдает</th>
-                                    <th>Сумма</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="el in this.resData">
-                                    <td>{{ el.from }}</td>
-                                    <td>{{ el.to }}</td>
-                                    <td>{{ el.sum }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <div v-for="check in this.resData">
+                            <b>{{ check.check_name }}</b>
+                            <hr>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover table-bordered thead-light">
+                                    <thead>
+                                    <tr>
+                                        <th>Кто отдает</th>
+                                        <th>Кому отдает</th>
+                                        <th>Сумма</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="el in check.debt_list">
+                                        <td>{{ el.from }}</td>
+                                        <td>{{ el.to }}</td>
+                                        <td>{{ el.sum }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -182,7 +186,7 @@
                 ],
             }
         },
-        
+
         methods: {
             encodeResult: function () {
                 return process.env.API_ADDR + '/check/' + btoa(encodeURI(JSON.stringify(this.resData)));
@@ -235,42 +239,45 @@
                     }
                 });
 
-                this.resData = [];
-                this.tData.forEach(check => {
-                    let allSum = 0;
-                    let mostPaid = {
-                        name: undefined,
-                        sum: 0
-                    };
+                try {
+                    this.resData = [];
+                    this.tData.forEach(check => {
+                        let allSum = 0;
+                        let mostPaid = {
+                            name: undefined,
+                            sum: 0
+                        };
 
-                    check.data.forEach(el => {
-                        allSum += Number.parseFloat(el.sum);
-                        if (mostPaid.sum < el.sum) {
-                            mostPaid = el;
-                        }
+                        check.data.forEach(el => {
+                            allSum += Number.parseFloat(el.sum);
+                            if (mostPaid.sum < el.sum) {
+                                mostPaid = el;
+                            }
+                        });
+
+                        let debtList = [];
+                        check.data.forEach(el => {
+                            if (el.name !== mostPaid.name && el.sum !== mostPaid.sum) {
+                                debtList.push({
+                                    from: el.name,
+                                    to: mostPaid.name,
+                                    sum: (allSum / check.data.length - el.sum).toFixed(2)
+                                });
+                            }
+                        });
+
+                        this.resData.push({
+                            check_name: check.check_name,
+                            debt_list: debtList
+                        });
+
+                        this.flag = true;
+                        document.getElementById('resultBtn').click();
                     });
-
-                    let debtList = [];
-                    check.data.forEach(el => {
-                        if (el.name !== mostPaid.name && el.sum !== mostPaid.sum) {
-                            debtList.push({
-                                from: el.name,
-                                to: mostPaid,
-                                sum: (allSum / check.data.length - el.sum).toFixed(2)
-                            });
-                        }
-                    });
-
-                    this.resData.push({
-                        check_name: check.check_name,
-                        debt_list: debtList
-                    });
-
-                    this.flag = true;
-                    document.getElementById('resultBtn').click();
-                    // this.flag = false;
-                    // this.notifyError('Ошибка!', response.data.msg);
-                });
+                } catch (e) {
+                    this.flag = false;
+                    this.notifyError('Ошибка!', 'Введены не корректные данные');
+                }
             },
 
             fillField: function (check_index, type, i, e) {
