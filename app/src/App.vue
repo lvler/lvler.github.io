@@ -28,6 +28,10 @@
                     <a href="https://vk.me/open_lvler" class="text-decoration-none" target="_blank">
                         <i class="fab fa-vk"></i> open_lvler
                     </a>
+                    | <b>Исходный код:</b>
+                    <a href="https://github.com/lvler/lvler.github.io" class="text-decoration-none" target="_blank">
+                        <i class="fab fa-github"></i> lvler
+                    </a>
                 </div>
             </div>
         </div>
