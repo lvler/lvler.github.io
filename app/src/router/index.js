@@ -12,7 +12,7 @@ Vue.use(Notifications);
 Vue.component('vue-headful', vueHeadful);
 
 export default new Router({
-    mode: 'history',
+    // mode: 'history',
     routes: [
         {
             path: '/',

@@ -81,17 +81,17 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <!--                        <div>-->
-                        <!--                            <small>Поделиться чеком:</small>-->
-                        <!--                            <div class="row">-->
-                        <!--                                <div class="form-group mx-sm-3 mb-2">-->
-                        <!--                                    <input type="text" class="form-control" :value="this.encodeResult()"-->
-                        <!--                                           id="encode-result">-->
-                        <!--                                </div>-->
-                        <!--                                <button type="button" class="btn btn-light mb-2" @click="copyCheck()">Скопировать-->
-                        <!--                                </button>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
+                        <div>
+                            <small>Поделиться чеком:</small>
+                            <div class="row">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <input type="text" class="form-control" :value="this.encodeResult()"
+                                           id="encode-result">
+                                </div>
+                                <button type="button" class="btn btn-light mb-2" @click="copyCheck()">Скопировать
+                                </button>
+                            </div>
+                        </div>
                         <div v-for="check in this.resData">
                             <b>{{ check.check_name }}</b>
                             <div class="table-responsive">
@@ -152,56 +152,56 @@
                 del_fl: false,
                 resData: [],
                 tData: [
-                    {
-                        check_name: '',
-                        data: [
-                            {
-                                name: '',
-                                sum: ''
-                            },
-                            {
-                                name: '',
-                                sum: ''
-                            },
-                        ]
-                    }
                     // {
-                    //     check_name: 'За бар',
+                    //     check_name: '',
                     //     data: [
                     //         {
-                    //             name: 'Роман',
-                    //             sum: '30'
+                    //             name: '',
+                    //             sum: ''
                     //         },
                     //         {
-                    //             name: 'Иван',
-                    //             sum: '20'
+                    //             name: '',
+                    //             sum: ''
                     //         },
-                    //         {
-                    //             name: 'Василий',
-                    //             sum: '50'
-                    //         }
-                    //     ]
-                    // },
-                    // {
-                    //     check_name: 'За такси',
-                    //     data: [
-                    //         {
-                    //             name: 'Роман',
-                    //             sum: '70'
-                    //         },
-                    //         {
-                    //             name: 'Иван',
-                    //             sum: '80'
-                    //         }
                     //     ]
                     // }
+                    {
+                        check_name: 'За бар',
+                        data: [
+                            {
+                                name: 'Роман',
+                                sum: '30'
+                            },
+                            {
+                                name: 'Иван',
+                                sum: '20'
+                            },
+                            {
+                                name: 'Василий',
+                                sum: '50'
+                            }
+                        ]
+                    },
+                    {
+                        check_name: 'За такси',
+                        data: [
+                            {
+                                name: 'Роман',
+                                sum: '70'
+                            },
+                            {
+                                name: 'Иван',
+                                sum: '80'
+                            }
+                        ]
+                    }
                 ],
             }
         },
 
         methods: {
             encodeResult: function () {
-                return process.env.API_ADDR + '/check/' + btoa(encodeURI(JSON.stringify(this.resData)));
+                return process.env.API_ADDR + '/#/check/' + btoa(encodeURI(JSON.stringify(this.resData)));
             },
 
             copyCheck: function () {
