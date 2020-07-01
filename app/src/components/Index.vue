@@ -163,36 +163,36 @@
                 del_fl: false,
                 resData: [],
                 tData: [
-                    // {
-                    //     check_name: '',
-                    //     data: [
-                    //         {
-                    //             name: '',
-                    //             sum: ''
-                    //         },
-                    //         {
-                    //             name: '',
-                    //             sum: ''
-                    //         },
-                    //     ]
-                    // }
                     {
-                        check_name: 'За бар',
+                        check_name: '',
                         data: [
                             {
-                                name: 'Роман',
-                                sum: '40'
+                                name: '',
+                                sum: ''
                             },
                             {
-                                name: 'Иван',
-                                sum: '50'
+                                name: '',
+                                sum: ''
                             },
-                            {
-                                name: 'Василий',
-                                sum: '50'
-                            }
                         ]
-                    },
+                    }
+                    // {
+                    //     check_name: 'За бар',
+                    //     data: [
+                    //         {
+                    //             name: 'Роман',
+                    //             sum: '40'
+                    //         },
+                    //         {
+                    //             name: 'Иван',
+                    //             sum: '50'
+                    //         },
+                    //         {
+                    //             name: 'Василий',
+                    //             sum: '60'
+                    //         }
+                    //     ]
+                    // },
                     // {
                     //     check_name: 'За такси',
                     //     data: [
@@ -270,26 +270,36 @@
                             name: undefined,
                             sum: 0
                         };
+                        let newMostPaid = [];
 
                         check.data.forEach(el => {
                             allSum += Number.parseFloat(el.sum);
-                            if (mostPaid.sum < el.sum) {
+                            if (Number.parseFloat(mostPaid.sum) < Number.parseFloat(el.sum)) {
                                 mostPaid = el;
                             }
                         });
 
+                        check.data.forEach(el => {
+                            if (mostPaid.sum === el.sum) {
+                                newMostPaid.push(el);
+                            }
+                        });
+
                         let debtList = [];
+                        console.log(newMostPaid);
                         check.data.forEach(el => {
                             if (el.name === '') {
                                 el.name = '<Имя не указано>';
                             }
-                            if (el.name !== mostPaid.name && el.sum !== mostPaid.sum) {
-                                debtList.push({
-                                    from: el.name,
-                                    to: mostPaid.name,
-                                    sum: (allSum / check.data.length - el.sum).toFixed(2)
-                                });
-                            }
+                            newMostPaid.forEach(paid => {
+                                if (el.name !== paid.name && el.sum !== paid.sum) {
+                                    debtList.push({
+                                        from: el.name,
+                                        to: paid.name,
+                                        sum: ((allSum / check.data.length - el.sum) / newMostPaid.length).toFixed(2)
+                                    });
+                                }
+                            });
                         });
 
                         this.resData.push({
