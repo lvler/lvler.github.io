@@ -84,7 +84,7 @@
                         <div>
                             <small>Поделиться чеком:</small>
                             <div class="row">
-                                <div class="form-group mx-sm-3 mb-2">
+                                <div class="form-group mx-sm-3 mb-2 calc-input">
                                     <input type="text" class="form-control" :value="this.encodeResult()"
                                            id="encode-result">
                                 </div>
@@ -125,6 +125,10 @@
         margin-bottom: 0 !important;
     }
 
+    .calc-input {
+        width: calc(100% - 173px);
+    }
+
     .card-body {
         padding-top: 0;
         padding-bottom: 0;
@@ -136,6 +140,13 @@
 
     #resultBtn {
         display: none;
+    }
+
+    @media (max-width: 575px) {
+        .calc-input {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
     }
 </style>
 
@@ -170,11 +181,11 @@
                         data: [
                             {
                                 name: 'Роман',
-                                sum: '30'
+                                sum: '40'
                             },
                             {
                                 name: 'Иван',
-                                sum: '20'
+                                sum: '50'
                             },
                             {
                                 name: 'Василий',
@@ -182,19 +193,19 @@
                             }
                         ]
                     },
-                    {
-                        check_name: 'За такси',
-                        data: [
-                            {
-                                name: 'Роман',
-                                sum: '70'
-                            },
-                            {
-                                name: 'Иван',
-                                sum: '80'
-                            }
-                        ]
-                    }
+                    // {
+                    //     check_name: 'За такси',
+                    //     data: [
+                    //         {
+                    //             name: 'Роман',
+                    //             sum: '70'
+                    //         },
+                    //         {
+                    //             name: 'Иван',
+                    //             sum: '80'
+                    //         }
+                    //     ]
+                    // }
                 ],
             }
         },
