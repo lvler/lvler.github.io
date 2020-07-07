@@ -32,12 +32,15 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <input type="hidden" :value="checkTotal = 0">
                             <tr v-for="el, i in check.data">
                                 <td>
                                     <input type="text" class="form-control" :value="el.name"
                                            @keyup="fillField(check_index, 'name', i, $event)">
                                 </td>
                                 <td>
+                                    <input type="hidden"
+                                           :value="checkTotal += Number.parseFloat(el.sum === '' ? 0 : el.sum)">
                                     <input placeholder="0" type="number" class="form-control" :value="el.sum"
                                            @keyup="fillField(check_index, 'sum', i, $event)"
                                            min="0">
@@ -59,6 +62,8 @@
                 </div>
             </div>
             <br>
+            <b>Сумма за чек: {{ checkTotal }}</b>
+            <hr>
         </div>
         <button class="btn btn-dark" @click="addCheck()">
             <i class="fas fa-receipt"></i>
@@ -162,6 +167,7 @@
                 flag: false,
                 del_fl: false,
                 resData: [],
+                checkTotal: 0,
                 tData: [
                     {
                         check_name: '',
