@@ -36,13 +36,11 @@
                             <tr v-for="el, i in check.data">
                                 <td>
                                     <input type="text" class="form-control" :value="el.name"
-                                           @keyup="fillField(check_index, 'name', i, $event)">
+                                           @keyup="fillFieldName(check_index, i, $event)">
                                 </td>
                                 <td>
-                                    <input type="hidden"
-                                           :value="checkTotal += Number.parseFloat(el.sum === '' ? 0 : el.sum)">
                                     <input placeholder="0" type="number" class="form-control" :value="el.sum"
-                                           @keyup="fillField(check_index, 'sum', i, $event)"
+                                           @keyup="fillFieldSum(check_index, i, $event)"
                                            min="0">
                                 </td>
                                 <td class="icon_td">
@@ -292,7 +290,6 @@
                         });
 
                         let debtList = [];
-                        console.log(newMostPaid);
                         check.data.forEach(el => {
                             if (el.name === '') {
                                 el.name = '<Имя не указано>';
@@ -322,15 +319,17 @@
                 }
             },
 
-            fillField: function (check_index, type, i, e) {
-                switch (type) {
-                    case 'name':
-                        this.tData[check_index]['data'][i].name = e.target.value;
-                        break;
-                    case 'sum':
-                        this.tData[check_index]['data'][i].sum = e.target.value;
-                        break;
-                }
+            fillFieldName: function (check_index, i, e) {
+                this.tData[check_index]['data'][i].name = e.target.value;
+                this.showHelpMsg();
+            },
+
+            fillFieldSum: function (check_index, i, e) {
+                this.tData[check_index]['data'][i].sum = e.target.value;
+                this.showHelpMsg();
+            },
+
+            showHelpMsg: function () {
                 if (this.hint_flag) {
                     this.hint_flag = false;
                     this.notifyInfo('Подсказка', 'Добавьте в чек только тех участников, между которыми хотите разделить сумму чека');
