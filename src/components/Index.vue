@@ -95,7 +95,7 @@
               </div>
             </div>
             <div v-for="check in this.resData">
-              <b>{{ check.check_name }} (Сумма чека: {{ check.total_check}})</b>
+              <b>{{ check.check_name }} (Сумма чека: {{ check.total_check }})</b>
               <div class="table-responsive">
                 <table class="table table-striped table-hover table-bordered thead-light">
                   <thead>
@@ -157,7 +157,6 @@ export default {
   mounted() {
     this.checkDelFlag();
     this.calculateTotalSum();
-    console.log(this.tData);
   },
 
   data: function () {
@@ -307,11 +306,20 @@ export default {
             }
             newMostPaid.forEach(paid => {
               if (el.name !== paid.name && el.sum !== paid.sum) {
-                debtList.push({
-                  from: el.name,
-                  to: paid.name,
-                  sum: ((allSum / check.data.length - el.sum) / newMostPaid.length).toFixed(2)
-                });
+                let refundAmount = ((allSum / check.data.length - el.sum) / newMostPaid.length).toFixed(2);
+                if (refundAmount >= 0) {
+                  debtList.push({
+                    from: el.name,
+                    to: paid.name,
+                    sum: refundAmount
+                  });
+                } else {
+                  debtList.push({
+                    from: paid.name,
+                    to: el.name,
+                    sum: Math.abs(refundAmount)
+                  });
+                }
               }
             });
           });
@@ -371,16 +379,16 @@ export default {
 
     addCheck: function () {
       this.tData.push(
-          {
-            check_name: '',
-            total_check: '',
-            data: [
-              {
-                name: '',
-                sum: ''
-              }
-            ]
-          }
+        {
+          check_name: '',
+          total_check: '',
+          data: [
+            {
+              name: '',
+              sum: ''
+            }
+          ]
+        }
       );
       this.checkDelFlag();
     }

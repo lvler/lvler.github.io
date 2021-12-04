@@ -1,7 +1,7 @@
 {
-  "name": "Leveler",
+  "name": "leveler",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A platform for calculating co-payments",
   "author": "Roman <roma.svetl@gmail.com>",
   "private": true,
   "scripts": {
