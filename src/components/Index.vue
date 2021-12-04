@@ -166,42 +166,42 @@ export default {
       del_fl: false,
       resData: [],
       tData: [
-        // {
-        //     check_name: '',
-        // total_check: 0,
-        //     data: [
-        //         {
-        //             name: '',
-        //             sum: ''
-        //         },
-        //         {
-        //             name: '',
-        //             sum: ''
-        //         },
-        //     ]
-        // },
         {
-          check_name: 'За бар',
+          check_name: '',
           total_check: 0,
           data: [
             {
-              name: 'Андрей',
-              sum: '2500'
+              name: '',
+              sum: ''
             },
             {
-              name: 'Роман',
-              sum: '0'
-            },
-            {
-              name: 'Влад',
-              sum: '3000'
-            },
-            {
-              name: 'Саня',
-              sum: '3000'
+              name: '',
+              sum: ''
             },
           ]
         },
+        // {
+        //   check_name: 'За бар',
+        //   total_check: 0,
+        //   data: [
+        //     {
+        //       name: 'Андрей',
+        //       sum: '2500'
+        //     },
+        //     {
+        //       name: 'Роман',
+        //       sum: '0'
+        //     },
+        //     {
+        //       name: 'Влад',
+        //       sum: '3000'
+        //     },
+        //     {
+        //       name: 'Саня',
+        //       sum: '3000'
+        //     },
+        //   ]
+        // },
         // {
         //   check_name: 'За такси',
         // total_check: 0,
