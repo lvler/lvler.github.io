@@ -3,7 +3,7 @@
         <vue-headful title="Просмотр чека | Leveler"/>
         <h5>Просмотр чека</h5>
         <div v-for="check in this.data">
-            <b>{{ check.check_name }}</b>
+          <b>{{ check.check_name }} (Сумма чека: {{ check.total_check}})</b>
             <hr>
             <div class="table-responsive">
                 <table class="table table-striped table-hover table-bordered thead-light">
