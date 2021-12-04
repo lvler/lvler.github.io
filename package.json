@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "prod": "node build/build.js"
+    "prod": "node build/build.js",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
