@@ -7,9 +7,9 @@ import NotFound from '@/components/NotFound'
 import vueHeadful from 'vue-headful'
 import Notifications from 'vue-notification'
 
-Vue.use(Router);
-Vue.use(Notifications);
-Vue.component('vue-headful', vueHeadful);
+Vue.use(Router)
+Vue.use(Notifications)
+Vue.component('vue-headful', vueHeadful)
 
 export default new Router({
   // mode: 'history',
@@ -32,7 +32,7 @@ export default new Router({
     {
       path: '/404',
       name: '404',
-      component: NotFound,
+      component: NotFound
     },
     {
       path: '*',
