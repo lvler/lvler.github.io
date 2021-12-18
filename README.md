@@ -7,3 +7,7 @@
     1) Настроить GitHub pages на deploy из директории `docs` в ветке `master`
     2) Выполнить команду `yarn build`
     3) Запушить все в `master`
+
+### Разработка
+1) `yarn dev`
+2) Перед коммитом сделать: `yarn csf`
